@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,10 +37,8 @@ public class Book{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name="book_id")
-//	@OneToOne(mappedBy="book_id", 
-//            fetch = FetchType.LAZY)
-	private Integer BookId;
+	@Column(name="id")
+	private Integer bookId;
 
 	@Column(columnDefinition="text")
 	private String name;
@@ -49,5 +49,12 @@ public class Book{
 	private GenreEnum genre;
 	
 	private Integer rating;
+	
+	@ManyToMany
+	@JoinTable(
+			name="book_author",
+			joinColumns=@JoinColumn(name="book_id",referencedColumnName="bookId"),
+			inverseJoinColumns=@JoinColumn(name="author_id",referencedColumnName="authorId"))
+	private List<Author> authors;
 	
 }
