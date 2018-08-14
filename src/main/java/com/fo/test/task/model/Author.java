@@ -50,4 +50,13 @@ public class Author{
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="author")
 	private List<Book_Author> book_author;
+
+
+	@Override
+	public String toString() {
+		return "Author [authorId=" + authorId + ", name=" + name + ", gender=" + gender + ", born=" + born
+				+ ", book_author=" + book_author + "]";
+	}
+	
+	
 }

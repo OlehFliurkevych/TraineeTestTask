@@ -34,4 +34,11 @@ public class Book_Author {
 	@JoinColumn(name="author_id")
 	private Author author;
 
+	@Override
+	public String toString() {
+		return "Book_Author [id=" + id + ", book=" + book + ", author=" + author + "]";
+	}
+	
+	
+
 }
