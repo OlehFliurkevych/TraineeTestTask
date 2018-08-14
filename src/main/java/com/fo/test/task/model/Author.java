@@ -1,18 +1,26 @@
 package com.fo.test.task.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fo.test.task.enumeration.GenderEnum;
 
@@ -23,14 +31,12 @@ import lombok.Setter;
 @Setter @Getter
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name="authors",indexes=@Index(columnList="name"))
 public class Author{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name="author_id")
-//	@OneToOne(mappedBy="author_id", 
-//            fetch = FetchType.LAZY)
 	private Integer authorId;
 
 	@Column(columnDefinition="text")
@@ -41,14 +47,7 @@ public class Author{
 	@Column(columnDefinition="date")
 	private Date born;
 	
-	@ManyToMany(mappedBy="authors")
-	private List<Book> books;
 	
-//	@ManyToMany(cascade=CascadeType.ALL)
-//	@JoinTable(	name="authors_books",
-//				joinColumns= {@JoinColumn(name="author_id")},
-//				inverseJoinColumns= {@JoinColumn(name="book_id")})
-//	private List<Books> books=new ArrayList<>();
-	
-	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="author")
+	private List<Book_Author> book_author;
 }
