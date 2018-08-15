@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fo.test.task.dao.BookDAO;
+import com.fo.test.task.enumeration.GenreEnum;
 import com.fo.test.task.model.Book;
 
 @RestController
@@ -80,5 +81,17 @@ public class BookController {
 			}
 		}
 		return booksWhichAuthorHaveMoreThanOneBook;
+	}
+	
+	@GetMapping("/by_genre/{genre}")
+	public int numberOfBooksByGenre(@PathVariable(value="genre")GenreEnum genre) {
+	List<Book> books=bookDAO.findAll();
+	int count=0;
+	for (Book book : books) {
+		if(book.getGenre().equals(genre)) {
+			count++;
+		}
+	}
+		return count;
 	}
 }

@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,22 +29,24 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="books",indexes=@Index(columnList="name"))
+@Table(name="books")
 public class Book{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name="id")
-	private Integer bookId;
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long book_id;
 
+	@NotBlank
 	@Column(columnDefinition="text")
 	private String name;
 	
-	@Column(columnDefinition="date")
+	@Column(columnDefinition="date",nullable=true)
 	private LocalDate published;
 	
+	@NotNull
 	private GenreEnum genre;
 	
+//	@Size(max=1,message="Rating must be from 1 to 5")
 	private Integer rating;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="book")
@@ -49,7 +54,7 @@ public class Book{
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", name=" + name + ", published=" + published + ", genre=" + genre
+		return "Book [bookId=" + book_id + ", name=" + name + ", published=" + published + ", genre=" + genre
 				+ ", rating=" + rating + ", book_author=" + book_author + "]";
 	}
 	

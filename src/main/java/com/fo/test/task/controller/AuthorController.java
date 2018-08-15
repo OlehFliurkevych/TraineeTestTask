@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fo.test.task.comparator.AuthorComparatorASC;
 import com.fo.test.task.dao.AuthorDAO;
+import com.fo.test.task.enumeration.GenreEnum;
 import com.fo.test.task.model.Author;
 
 @RestController
@@ -87,6 +88,19 @@ public class AuthorController {
 		Collections.sort(olderAuthors,new AuthorComparatorASC());
 		return olderAuthors;
 	}
+	
+	@GetMapping("/most_books")
+	public ResponseEntity<Author> windAuthorWhichHasMostBooks(){
+		List<Author> authors=authorDAO.findAll();
+		Author authorWithMostBooks=authors.get(0);
+		for (Author author : authors) {
+			if(author.getBook_author().size()>authorWithMostBooks.getBook_author().size()) {
+				authorWithMostBooks=author;
+			}
+		}
+		return ResponseEntity.ok().body(authorWithMostBooks);
+	}
+	
 	
 	
 }
