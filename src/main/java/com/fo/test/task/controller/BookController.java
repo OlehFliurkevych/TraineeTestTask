@@ -1,5 +1,6 @@
 package com.fo.test.task.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -69,5 +70,15 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 	
-	
+	@GetMapping("/more_than_one_book")
+	public List<Book> findBooksWhichAuthorHaveMoreThanOneBook(){
+		List<Book> books=bookDAO.findAll();
+		List<Book> booksWhichAuthorHaveMoreThanOneBook=new ArrayList<>();
+		for (Book book : books) {
+			if(book.getBook_author().size()>1) {
+				booksWhichAuthorHaveMoreThanOneBook.add(book);
+			}
+		}
+		return booksWhichAuthorHaveMoreThanOneBook;
+	}
 }
