@@ -3,11 +3,13 @@ package com.fo.test.task.controller;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fo.test.task.comparator.AuthorComparatorASC;
 import com.fo.test.task.dao.AuthorDAO;
 import com.fo.test.task.model.Author;
 
@@ -25,6 +28,7 @@ import com.fo.test.task.model.Author;
 @RequestMapping("/author")
 public class AuthorController {
 
+	@Autowired
 	AuthorDAO authorDAO;
 	
 	@PostMapping("/authors")
@@ -76,12 +80,11 @@ public class AuthorController {
 		List<Author> authors=authorDAO.findAll();
 		List<Author> olderAuthors=new ArrayList<>();
 		for (Author author : authors) {
-			@Deprecated
-			int year=author.getBorn().getYear();
-			if((LocalDate.now().getYear()-year)>55) {
+			if((LocalDate.now().getYear()-author.getBorn().getYear())>55) {
 				olderAuthors.add(author);
 			}
 		}
+		Collections.sort(olderAuthors,new AuthorComparatorASC());
 		return olderAuthors;
 	}
 	

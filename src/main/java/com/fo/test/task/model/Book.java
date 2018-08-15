@@ -1,6 +1,6 @@
 package com.fo.test.task.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,7 +38,7 @@ public class Book{
 	private String name;
 	
 	@Column(columnDefinition="date")
-	private Date published;
+	private LocalDate published;
 	
 	private GenreEnum genre;
 	
