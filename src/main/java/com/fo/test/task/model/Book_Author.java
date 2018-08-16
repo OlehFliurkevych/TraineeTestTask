@@ -1,6 +1,7 @@
 package com.fo.test.task.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -14,11 +15,13 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -26,11 +29,12 @@ import lombok.Setter;
 public class Book_Author {
 	
 	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="book_authors_id",nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 //	@NotNull
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="book_id")
 	private Book book;
 	
@@ -39,9 +43,20 @@ public class Book_Author {
 	@JoinColumn(name="author_id")
 	private Author author;
 
+	
 	@Override
 	public String toString() {
 		return "Book_Author [id=" + id + ", book=" + book + ", author=" + author + "]";
+	}
+
+	@JsonIgnore
+	public Book getBook() {
+		return book;
+	}
+
+	@JsonIgnore
+	public Author getAuthor() {
+		return author;
 	}
 	
 	

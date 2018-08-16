@@ -36,7 +36,7 @@ public class Book_AuthorController {
 	}
 	
 	@GetMapping("/notes/{id}")
-	public ResponseEntity<Book_Author> getBook_authorById(@PathVariable(value="id")Integer book_authorId) {
+	public ResponseEntity<Book_Author> getBook_authorById(@PathVariable(value="id")Long book_authorId) {
 		Book_Author book_author=book_AuthorDAO.findOne(book_authorId);
 		if(book_author==null) {
 			return ResponseEntity.notFound().build();
@@ -45,7 +45,7 @@ public class Book_AuthorController {
 	}
 	
 	@PutMapping("/book_authors/{id}")
-	public ResponseEntity<Book_Author> updateBook(@PathVariable(value="id")Integer bookId,
+	public ResponseEntity<Book_Author> updateBook(@PathVariable(value="id")Long bookId,
 			@Valid @RequestBody Book_Author book_authorDetails){
 		Book_Author book_author=book_AuthorDAO.findOne(bookId);
 		if(book_author==null) {
@@ -58,7 +58,7 @@ public class Book_AuthorController {
 	}
 	
 	@DeleteMapping("/notes/{id}")
-	public ResponseEntity<Book_Author> deleteBook_Author(@PathVariable(value="id")Integer book_authorId){
+	public ResponseEntity<Book_Author> deleteBook_Author(@PathVariable(value="id")Long book_authorId){
 		Book_Author book_Author=book_AuthorDAO.findOne(book_authorId);
 		if(book_Author==null) {
 			return ResponseEntity.notFound().build();

@@ -13,11 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fo.test.task.enumeration.GenderEnum;
@@ -34,8 +37,9 @@ import lombok.Setter;
 public class Author{
 	
 	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long author_id;
+	@Column(name="author_id",nullable=false,insertable=true)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long authorId;
 
 	@NotBlank
 	@Column(columnDefinition="text")
@@ -48,14 +52,16 @@ public class Author{
 	private LocalDate born;
 	
 	
-	@OneToMany(cascade=CascadeType.ALL
-			,mappedBy="author")
+//	@Fetch(FetchMode.JOIN)
+//	@JoinColumn(name="author_id", referencedColumnName="author_id")
+//	@OneToMany(cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="book")
 	private List<Book_Author> book_author;
 
 
 	@Override
 	public String toString() {
-		return "Author [authorId=" + author_id + ", name=" + name + ", gender=" + gender + ", born=" + born
+		return "Author [authorId=" + authorId + ", name=" + name + ", gender=" + gender + ", born=" + born
 				+ ", book_author=" + book_author + "]";
 	}
 	

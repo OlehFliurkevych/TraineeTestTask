@@ -28,7 +28,7 @@ public class BookDAO {
 	
 	//get a book by id
 	
-	public Book findOne(Integer bookId) {
+	public Book findOne(Long bookId) {
 		return bookRepository.getOne(bookId);
 	}
 	

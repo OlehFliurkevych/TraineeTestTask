@@ -22,7 +22,7 @@ public class Book_AuthorDAO {
 		return book_AuthorRepository.findAll();
 	}
 	
-	public Book_Author findOne(Integer book_authorId) {
+	public Book_Author findOne(Long book_authorId) {
 		return book_AuthorRepository.getOne(book_authorId);
 	}
 	

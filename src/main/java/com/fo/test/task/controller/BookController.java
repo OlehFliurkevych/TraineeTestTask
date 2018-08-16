@@ -38,7 +38,7 @@ public class BookController {
 	}
 	
 	@GetMapping("/notes/{id}")
-	public ResponseEntity<Book> getBookById(@PathVariable(value="id")Integer bookId) {
+	public ResponseEntity<Book> getBookById(@PathVariable(value="id")Long bookId) {
 		Book book=bookDAO.findOne(bookId);
 		if(book==null) {
 			return ResponseEntity.notFound().build();
@@ -47,7 +47,7 @@ public class BookController {
 	}
 	
 	@PutMapping("/books/{id}")
-	public ResponseEntity<Book> updateBook(@PathVariable(value="id")Integer bookId,
+	public ResponseEntity<Book> updateBook(@PathVariable(value="id")Long bookId,
 			@Valid @RequestBody Book bookDetails){
 		Book book=bookDAO.findOne(bookId);
 		if(book==null) {
@@ -62,7 +62,7 @@ public class BookController {
 	}
 	
 	@DeleteMapping("/notes/{id}")
-	public ResponseEntity<Book> deleteBook(@PathVariable(value="id")Integer bookId){
+	public ResponseEntity<Book> deleteBook(@PathVariable(value="id")Long bookId){
 		Book book=bookDAO.findOne(bookId);
 		if(book==null) {
 			return ResponseEntity.notFound().build();

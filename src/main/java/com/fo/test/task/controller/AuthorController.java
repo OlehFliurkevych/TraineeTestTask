@@ -43,7 +43,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/notes/{id}")
-	public ResponseEntity<Author> getAuthorById(@PathVariable(value="id")Integer authorId) {
+	public ResponseEntity<Author> getAuthorById(@PathVariable(value="id")Long authorId) {
 		Author author=authorDAO.findOne(authorId);
 		if(author==null) {
 			return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/authors/{id}")
-	public ResponseEntity<Author> updateAuthor(@PathVariable(value="id")Integer authorId,
+	public ResponseEntity<Author> updateAuthor(@PathVariable(value="id")Long authorId,
 			@Valid @RequestBody Author authorDetails){
 		Author author=authorDAO.findOne(authorId);
 		if(author==null) {
@@ -61,13 +61,12 @@ public class AuthorController {
 		author.setBorn(authorDetails.getBorn());
 		author.setGender(authorDetails.getGender());
 		author.setName(authorDetails.getName());
-		author.setBook_author(authorDetails.getBook_author());
 		Author updateAuthor=authorDAO.save(author);
 		return ResponseEntity.ok().body(updateAuthor);
 	}
 	
 	@DeleteMapping("/notes/{id}")
-	public ResponseEntity<Author> deleteAuthor(@PathVariable(value="id")Integer authorId){
+	public ResponseEntity<Author> deleteAuthor(@PathVariable(value="id")Long authorId){
 		Author author=authorDAO.findOne(authorId);
 		if(author==null) {
 			return ResponseEntity.notFound().build();

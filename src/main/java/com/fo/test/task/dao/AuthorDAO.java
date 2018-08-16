@@ -22,7 +22,7 @@ public class AuthorDAO {
 		return authorRepository.findAll();
 	}
 	
-	public Author findOne(Integer id) {
+	public Author findOne(Long id) {
 		return authorRepository.getOne(id);
 	}
 	

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.fo.test.task.model.Book;;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book,Integer>{
+public interface BookRepository extends JpaRepository<Book,Long>{
 
 	
 }
