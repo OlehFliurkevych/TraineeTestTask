@@ -78,3 +78,31 @@ Tasks:
 	  }
 		return count;
 	  }
+
+
+	Examples adding book, author and books_authors(using Postman):
+	
+		{
+			"name":"Zalyshynets. Chornyy voron",
+			"genre":"HISTORICAL_NOVEL",
+			"rating":"5"
+		}
+		
+		{
+			"name":"Schkliiar Vasyl Mikolauovych",
+			"gender":"MALE",
+			"born":"1951-06-10"
+		}
+		
+		{
+			"book":{
+				"name":"Zalyshynets. Chornyy voron",
+				"genre":"HISTORICAL_NOVEL",
+				"rating":"5"
+			},
+			"author":{
+				"name":"Schkliiar Vasyl Mikolauovych",
+				"gender":"MALE",
+				"born":"1951-06-10"
+			}
+		}
