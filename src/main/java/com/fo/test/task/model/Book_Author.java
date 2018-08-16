@@ -4,7 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +16,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -33,12 +31,12 @@ public class Book_Author {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-//	@NotNull
+	@NotNull
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="book_id")
 	private Book book;
 	
-//	@NotNull
+	@NotNull
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="author_id")
 	private Author author;

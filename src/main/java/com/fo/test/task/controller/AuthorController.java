@@ -1,9 +1,7 @@
 package com.fo.test.task.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fo.test.task.comparator.AuthorComparatorASC;
 import com.fo.test.task.dao.AuthorDAO;
-import com.fo.test.task.enumeration.GenreEnum;
 import com.fo.test.task.model.Author;
 
 @RestController
@@ -80,6 +77,8 @@ public class AuthorController {
 		List<Author> authors=authorDAO.findAll();
 		List<Author> olderAuthors=new ArrayList<>();
 		for (Author author : authors) {
+			if(author.getBorn()==null)
+				continue;
 			if((LocalDate.now().getYear()-author.getBorn().getYear())>55) {
 				olderAuthors.add(author);
 			}

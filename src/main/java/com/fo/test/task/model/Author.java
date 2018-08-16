@@ -1,11 +1,8 @@
 package com.fo.test.task.model;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -13,14 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fo.test.task.enumeration.GenderEnum;
@@ -51,10 +45,6 @@ public class Author{
 	@Column(columnDefinition="date",nullable=true)
 	private LocalDate born;
 	
-	
-//	@Fetch(FetchMode.JOIN)
-//	@JoinColumn(name="author_id", referencedColumnName="author_id")
-//	@OneToMany(cascade={CascadeType.ALL})
 	@OneToMany(mappedBy="book")
 	private List<Book_Author> book_author;
 

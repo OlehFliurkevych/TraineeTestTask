@@ -8,11 +8,6 @@ public class AuthorComparatorASC implements Comparator<Author>{
 
 	@Override
 	public int compare(Author o1, Author o2) {
-		if(o1.getBorn()==null&&o2.getBorn()!=null) {
-			return 1;
-		}else if(o2.getBorn()==null&&o1.getBorn()!=null) {
-			return -1;
-		}
 		if(o1.getBorn().getYear()>o2.getBorn().getYear()) {
 			return 1;
 		}else if(o1.getBorn().getYear()<o2.getBorn().getYear()) {
