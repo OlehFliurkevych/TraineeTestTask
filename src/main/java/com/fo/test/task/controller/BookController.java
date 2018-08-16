@@ -71,6 +71,8 @@ public class BookController {
 		return ResponseEntity.ok().build();
 	}
 	
+	//Return books whose author has more than 1 written books
+	
 	@GetMapping("/more_than_one_book")
 	public List<Book> findBooksWhichAuthorHaveMoreThanOneBook(){
 		List<Book> books=bookDAO.findAll();
@@ -82,6 +84,8 @@ public class BookController {
 		}
 		return booksWhichAuthorHaveMoreThanOneBook;
 	}
+	
+	//Calculate number of books by genre
 	
 	@GetMapping("/by_genre/{genre}")
 	public int numberOfBooksByGenre(@PathVariable(value="genre")GenreEnum genre) {

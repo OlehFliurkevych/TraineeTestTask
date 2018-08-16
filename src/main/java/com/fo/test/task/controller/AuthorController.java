@@ -72,6 +72,8 @@ public class AuthorController {
 		return ResponseEntity.ok().build();
 	}
 	
+	//Show authors which are older 55 years old and sort them by "born" column
+	
 	@GetMapping("/older")
 	public List<Author> older55years(){
 		List<Author> authors=authorDAO.findAll();
@@ -86,6 +88,8 @@ public class AuthorController {
 		Collections.sort(olderAuthors,new AuthorComparatorASC());
 		return olderAuthors;
 	}
+	
+	//Find out author which has most books
 	
 	@GetMapping("/most_books")
 	public ResponseEntity<Author> windAuthorWhichHasMostBooks(){
