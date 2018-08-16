@@ -58,6 +58,7 @@ public class AuthorController {
 		author.setBorn(authorDetails.getBorn());
 		author.setGender(authorDetails.getGender());
 		author.setName(authorDetails.getName());
+		author.setBook_author(authorDetails.getBook_author());
 		Author updateAuthor=authorDAO.save(author);
 		return ResponseEntity.ok().body(updateAuthor);
 	}
